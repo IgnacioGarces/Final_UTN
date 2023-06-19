@@ -28,9 +28,11 @@ const fetchUnPaciente = (req,res)=>{
 
 const cargaPaciente = (req,res)=>{
     let {nombre,apellido,genero,edad,dni,cel} = req.body; 
+    let img = `http://localhost:4000/public/`+req.file.filename;
+    
 //dbConnection.query() ejecuta una consulta SQL para insertar un nuevo registro en la tabla "paciente" de la base de datos.
-    dbConnection.query('INSERT INTO pacientes(nombre,apellido,genero,edad,dni,cel) VALUES(?,?,?,?,?,?)',
-    [nombre,apellido,genero,edad,dni,cel],
+    dbConnection.query('INSERT INTO pacientes(nombre,apellido,genero,edad,dni,cel,imagen) VALUES(?,?,?,?,?,?,?)',
+    [nombre,apellido,genero,edad,dni,cel,img],
     (err,data)=>{
         if (err) {
             res.send(err)

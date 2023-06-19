@@ -30,7 +30,7 @@ CREATE TABLE `consultorio` .pacientes(
 Creo api.js y le cargo los packetes de Express, Cors y Nodemon 
 -------------------------------------------------------------
 
-CLASE 17
+*CLASE 17*
 --------
 
 00:20:00 ~ 01:06:00
@@ -51,7 +51,25 @@ Detecta los docs que recibe para darnos la posibilidad de manejo de los mismos. 
 npm i multer-
 
 
-ME QUEDE EN 02:29:00
+*CLASE 18*
+--------
+
+00:58:00
+Autorizacion y Autenticacion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

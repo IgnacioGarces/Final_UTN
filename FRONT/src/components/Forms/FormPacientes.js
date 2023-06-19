@@ -76,10 +76,12 @@ export default function FormPacientes() {
             <button type="submit" className="btn btn-success">Cargar</button>
             </form>
             :
-            <div className="alert alert-dismissible alert-success mt-4">
-                <button type="button" className="btn-close" data-bs-dismiss="alert" onClick={()=> setMensajeOculto(true)}></button>
-                <strong> Pelicula Cargada Exitosamente!</strong>
-            </div> }
+                alert("Paciente Cargado!")
+            // <div className="alert alert-dismissible alert-success mt-4">
+            //     <button type="button" className="btn-close" data-bs-dismiss="alert" onClick={()=> setMensajeOculto(true)}></button>
+            //     <strong> Pelicula Cargada Exitosamente!</strong>
+            // </div> 
+        }
         </Fragment>
     )
 }

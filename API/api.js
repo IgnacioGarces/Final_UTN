@@ -1,11 +1,11 @@
-const express = require('express');
-const multer = require ('multer');
-const server =express();
 const port = 4000;
+const express = require('express');
+const server =express();
 const cors = require('cors');
 const router = require('./routes/routerPacientes')
 require('./config/database')
 /*contiene la configuración y la conexión con la base de datos. Este archivo establece la conexión con la base de datos MySQL utilizada en tu proyecto.*/
+
 
 server.use(express.json());
 //Si recibimos un documento en formato Json lo podemos entender
@@ -16,6 +16,9 @@ que permite al servidor entender las solicitudes entrantes
 con datos codificados en URL. 
 Esto es útil cuando se envían datos desde formularios HTML
 utilizando el método POST.*/
+
+server.use('/public',express.static('./images'));
+//Configuramos endpoint para obtener imagenes o archivos guardados. 
 
 server.use(cors());
 /*Esta línea habilita el middleware cors, lo que permite las solicitudes de dominios cruzados. 
@@ -33,3 +36,4 @@ server.listen(port,()=>{
     console.log(`server corriendo en el puerto ${port}`)
 })
 //inicia el servidor y lo pone en escucha en el puerto 4000
+
