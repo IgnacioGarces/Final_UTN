@@ -1,6 +1,29 @@
 const dbConnection=require("../config/database");
 //Este módulo proporciona la conexión a la base de datos para realizar consultas.
 
+const jwt = require('jsonwebtoken')
+
+
+const login =(req,res)=>{
+    //verificar si el usuario esta registrado
+    const {user,password} = req.body;
+
+    const usuarioRegristrado = {
+        user:"admin",
+        password:"admin123"
+    }
+
+    if (user === usuarioRegristrado.user && password === usuarioRegristrado.password) {
+        console.log('Acceso Autorizado')
+        // jwt.sign()
+        res.send('Acceso autorizado')
+    }else{
+        res.send('Acceso denegado')
+    }
+    //generar token para devolverlo y usarlo
+
+}
+
 
 const fetchTodosLosPacientes = (res)=>{
     dbConnection.query("SELECT * FROM pacientes",(err,data)=>{
@@ -74,6 +97,7 @@ const deletePaciente= (req,res)=>{
 
 
 module.exports={
+    login,
     cargaPaciente,
     fetchTodosLosPacientes,
     fetchUnPaciente,

@@ -1,4 +1,10 @@
-const {cargaPaciente,fetchTodosLosPacientes,fetchUnPaciente,deletePaciente} = require('../utils/functionsDB');
+const {login,cargaPaciente,fetchTodosLosPacientes,fetchUnPaciente,deletePaciente} = require('../utils/functionsDB');
+
+const registrar = async (req,res)=>{
+
+    await login(req,res)
+    
+}
 
 const todosLosPacientes = async(req,res)=>{
 
@@ -20,4 +26,4 @@ const eliminarPaciente = async (req,res)=>{
     await deletePaciente(req,res)
 }
 
-module.exports={todosLosPacientes,traerUnPaciente,cargarPaciente,eliminarPaciente}
+module.exports={registrar,todosLosPacientes,traerUnPaciente,cargarPaciente,eliminarPaciente}

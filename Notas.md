@@ -56,7 +56,9 @@ npm i multer-
 
 00:58:00
 Autorizacion y Autenticacion
+JWT (Json Web Token)
 
+Me quede en 01:25:00 
 
 
 
