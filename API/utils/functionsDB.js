@@ -1,31 +1,7 @@
 const dbConnection=require("../config/database");
-//Este módulo proporciona la conexión a la base de datos para realizar consultas.
-
-const jwt = require('jsonwebtoken')
 
 
-const login =(req,res)=>{
-    //verificar si el usuario esta registrado
-    const {user,password} = req.body;
-
-    const usuarioRegristrado = {
-        user:"admin",
-        password:"admin123"
-    }
-
-    if (user === usuarioRegristrado.user && password === usuarioRegristrado.password) {
-        console.log('Acceso Autorizado')
-        // jwt.sign()
-        res.send('Acceso autorizado')
-    }else{
-        res.send('Acceso denegado')
-    }
-    //generar token para devolverlo y usarlo
-
-}
-
-
-const fetchTodosLosPacientes = (res)=>{
+const fetchTodos = (req,res)=>{
     dbConnection.query("SELECT * FROM pacientes",(err,data)=>{
         if(err){
             res.send(err)
@@ -34,7 +10,6 @@ const fetchTodosLosPacientes = (res)=>{
         }
     })
 }
-
 
 const fetchUnPaciente = (req,res)=>{
 
@@ -49,7 +24,7 @@ const fetchUnPaciente = (req,res)=>{
 }
 
 
-const cargaPaciente = (req,res)=>{
+const uploadPaciente = (req,res)=>{
     let {nombre,apellido,genero,edad,dni,cel} = req.body; 
     let img = `http://localhost:4000/public/`+req.file.filename;
     
@@ -60,7 +35,7 @@ const cargaPaciente = (req,res)=>{
         if (err) {
             res.send(err)
         } else {
-            res.redirect('/pacientes/infoCompletaPacientes')  
+            res.redirect('/infoCompletaPacientes')  
         }
     }
     )
@@ -80,26 +55,12 @@ const deletePaciente= (req,res)=>{
 
 
 
-//  DELETE USUARIO
-
-// const deleteUsuario = (req,res)=>{
-//     const {usuario} = req.body;
-//     dbConnection.query('DELETE FROM usuarios WHERE nombreUsuario= ?',[usuario],(err,data)=>{
-//         if (err) {
-//             res.send(err)
-//         }else{
-//             res.send(data)
-//         }
-//     })
-// }
-//  Se pasa la informacion mediante el body porque es info sensible. 
 
 
 
 module.exports={
-    login,
-    cargaPaciente,
-    fetchTodosLosPacientes,
+    uploadPaciente,
+    fetchTodos,
     fetchUnPaciente,
     deletePaciente
 }

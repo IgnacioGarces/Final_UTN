@@ -14,7 +14,7 @@ export default function FormPacientes() {
             "cel": event.target[5].value
         })
 
-        const response = await fetch('http://localhost:4000/pacientes/cargarPaciente', 
+        const response = await fetch('http://localhost:4000/cargarPaciente', 
         {
             method: 'POST',
             body: form,

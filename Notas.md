@@ -58,9 +58,20 @@ npm i multer-
 Autorizacion y Autenticacion
 JWT (Json Web Token)
 
-Me quede en 01:25:00 
 
+*CLASE 19*
+---------
 
+01:00:00 Variables de entorno
+DOTENV
+
+Nos permite hacer la coneccion en el archivo oculto 'env'
+
+'npm i dotenv'
+
+1:20:00 BCRYPT
+codificar datos 
+'npm i bcrypt'
 
 
 

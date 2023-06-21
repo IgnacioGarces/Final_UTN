@@ -1,11 +1,14 @@
 //se importa el módulo mysql2 que proporciona funcionalidades para trabajar con la base de datos MySQL.
 const mysql=require('mysql2');
+require ('dotenv').config();
+
+
 
 //contiene la configuración necesaria para establecer la conexión con la base de datos MySQL. 
 const dataBaseInfo = {
-    host:'localhost',
-    user:'root',
-    database:'consultorio'
+    host:process.env.HOST,
+    user:process.env.DB_USER,
+    database:process.env.DB
 }
 
 
@@ -20,5 +23,7 @@ dbConnection.connect((error)=>{
         console.log('Coneccion con DB Mysql exitosa')
     }
 }); 
+
+
 
 module.exports=dbConnection;

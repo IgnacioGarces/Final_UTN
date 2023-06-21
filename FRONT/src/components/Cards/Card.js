@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 export default function Card({info}) {
 
     const borrarPaciente = async () => {
-        await fetch (`http://localhost:4000/pacientes/eliminarPaciente/${info.dni}`, {
+        await fetch (`http://localhost:4000/eliminarPaciente/${info.dni}`, {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json'
@@ -20,7 +20,7 @@ export default function Card({info}) {
         <Fragment>
 
             <div className="card m-2" >
-            <img src="..." className="card-img-top" alt="..."/>
+            <img src={info.image} className="card-img-top" alt="foto de paciente"/>
             <div className="card-body">
                 <h4 className="card-title">{info.nombre} {info.apellido}</h4>
                 

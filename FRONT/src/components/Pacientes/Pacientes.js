@@ -6,7 +6,7 @@ export default function Pacientes (){
     const [datos,setDatos] = useState([]);
 
     const traerInfo = async ()=>{
-        let info = await fetch ('http://localhost:4000/pacientes/infoCompletaPacientes')
+        let info = await fetch ('http://localhost:4000/infoCompletaPacientes')
                          .then(respuesta => respuesta.json())
                          .then(data => setDatos(data))
                          .catch(error=> console.log(`ERROR ${error}`))
