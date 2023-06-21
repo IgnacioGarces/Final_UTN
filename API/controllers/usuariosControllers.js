@@ -2,13 +2,19 @@ require ('dotenv').config();
 const passSeg = process.env.PASS_SEGURA;
 const jwt = require('jsonwebtoken');
 const dbConnection = require('../config/database');
+const bcrypt = require('bcrypt');
 
-const registrarUsuario =  (req,res)=>{
+
+
+const registrarUsuario = async (req,res)=>{
     //traemos la info del front a guardar
    const {user,password} = req.body;
+
+   //encriptacion de la password
+   let passEncriptada = await bcrypt.hash(password,10);
     
    //guardamos la data en la DB
-   dbConnection.query('INSERT INTO users (user,password) VALUES(?,?)',[user,password],(err,data)=>{
+   dbConnection.query('INSERT INTO users (user,password) VALUES(?,?)',[user,passEncriptada],(err,data)=>{
     if (err) {
         res.send(err)
     } else {
@@ -20,29 +26,45 @@ const registrarUsuario =  (req,res)=>{
 
 
 const login = (req,res)=> {
-    let {user,password} = req.body; 
+    const {user,password} = req.body; 
 
-    dbConnection.query("SELECT * FROM users WHERE user=?",[user],(err,data)=>{
+    dbConnection.query("SELECT * FROM users WHERE user=?",[user],async(err,data)=>{
         if(err){
-            res.send("Usuario no esta registrado ")
+            res.send("Error en el servidor "+ err)
         }else{
-
+            //si la peticion es correcta pero no existe un usuario con ese nombre...
+            if (data.length == 0) {
+                return res.status(204).json("usuario no registrado")
+            }
+            //Si ubica al usuario.. 
             let info= data[0];
-            if(user === info.user && password === info.password){
-                console.log("usuario correcto, se puede generar el token")
+
+            //BCRYPT
+            const passwordOk=await bcrypt.compare(password,info.password)//devuelve un booleano 
+          
+            console.log(info)
+            console.log(info.password)
+            console.log(password)
+            console.log(passwordOk)
+            if( passwordOk == true){
     
+                //JWT
                 //generar el token para devolverlo y que pueda usarlo para cargar una pelicula
                 jwt.sign({user},passSeg,{expiresIn:'30m'},(error,token)=>{
                     if(error){
                         res.send(error);
                     }else{
-                        res.json({token});
+                        res.json({
+                            message:"usuario logeado",
+                            tokenLogIn:token
+                        });
                     }
                 })
             }else{
-                res.send("Usuario incorrecto")
+                res.status(401).json({message:"Password incorrecta"})
             }
         }
+        
 
     })
 };

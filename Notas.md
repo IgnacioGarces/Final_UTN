@@ -64,17 +64,25 @@ JWT (Json Web Token)
 
 01:00:00 Variables de entorno
 DOTENV
-
 Nos permite hacer la coneccion en el archivo oculto 'env'
-
 'npm i dotenv'
+
 
 1:20:00 BCRYPT
 codificar datos 
 'npm i bcrypt'
+02:20:00 Arranca con BCRYPT 
 
 
 
+1:48:00
+Resuelve el problema de usar el mismo form para el post y para el put
+03:02:00 
+Ocultar y mostrar componentes usando estados
+
+
+CLASE 20
+--------
 
 
 

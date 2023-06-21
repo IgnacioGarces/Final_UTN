@@ -14,7 +14,7 @@ const fetchTodos = (req,res)=>{
 const fetchUnPaciente = (req,res)=>{
 
     let nombre = req.params.nombre //Guardo el parametro del req..
-    dbConnection.query('SELECT * FROM pacientes WHERE nombrePaciente= ?',[nombre],(err,data)=>{
+    dbConnection.query('SELECT * FROM pacientes WHERE nombre= ?',[nombre],(err,data)=>{
         if (err) {
             res.send(err)
         }else{
@@ -42,6 +42,23 @@ const uploadPaciente = (req,res)=>{
 //El método query() toma tres argumentos: la consulta SQL como una cadena, los valores de los parámetros para la consulta y un callback que se ejecutará después de que se complete la consulta.
 };
 
+const modifyPaciente = (req,res)=>{
+    let editPaciente = req.params.edit;
+    let {nombre,apellido,genero,edad,dni,cel}= req.body;
+    dbConnection.query(
+        `UPDATE pacientes SET nombre=?, apellido=?, genero=?, edad=?, dni=?, cel=? WHERE dni=${editPaciente}`,
+        [nombre, apellido, genero, edad, dni, cel],
+        (err, data) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.redirect('/infoCompletaPacientes');
+          }
+        }
+      );
+    };
+
+
 const deletePaciente= (req,res)=>{
     let borrarPaciente = req.params.borrar;
     dbConnection.query('DELETE FROM pacientes WHERE dni= ?',[borrarPaciente],(err,data)=>{
@@ -62,5 +79,6 @@ module.exports={
     uploadPaciente,
     fetchTodos,
     fetchUnPaciente,
+    modifyPaciente,
     deletePaciente
 }

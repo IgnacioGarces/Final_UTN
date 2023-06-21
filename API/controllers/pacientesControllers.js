@@ -1,4 +1,4 @@
-const {uploadPaciente,fetchTodos,fetchUnPaciente,deletePaciente} = require('../utils/functionsDB');
+const {uploadPaciente,fetchTodos,fetchUnPaciente,modifyPaciente,deletePaciente} = require('../utils/functionsDB');
     //Este módulo proporciona la conexión a la base de datos para realizar consultas.
 
 
@@ -18,12 +18,12 @@ const cargarPaciente = async(req,res)=>{
     await uploadPaciente (req,res)
 };
 
-const editPaciente = async (req,res)=>{
-    await res.send('okey')
+const editarPaciente = async (req,res)=>{
+    await modifyPaciente(req,res)
 }
 
 const eliminarPaciente = async (req,res)=>{
     await deletePaciente(req,res)
 }
 
-module.exports= {todosLosPacientes,traerUnPaciente,cargarPaciente,editPaciente,eliminarPaciente};
+module.exports= {todosLosPacientes,traerUnPaciente,cargarPaciente,editarPaciente,eliminarPaciente};
